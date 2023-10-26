@@ -1,0 +1,22 @@
+name: API JAVALIN WORKFLOW
+on:
+  push:
+    branches: [ main ] // This is the branch that will trigger the workflow on a push
+  pull_request:
+    branches: [ main ] // This is the branch that will trigger the workflow on a pull request
+jobs:
+  build:
+    runs-on: ubuntu-latest // This is the operating system that will run the workflow
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3 // This is a GitHub action that checks out your repository
+      -
+        name: Set up JDK 17
+        uses: actions/setup-java@v3 // This is a GitHub action that sets up the JDK
+        with:
+          java-version: '17'
+          distribution: 'temurin' // This is the JDK distribution
+      -
+        name: Build with Maven
+        run: mvn --batch-mode --update-snapshots package // This is the command to build the project
